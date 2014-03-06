@@ -24,19 +24,28 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['gruntfile.js', 'app/js/**/*.js']
+      files: ['app/js/**/*.js', 'spec/**/*.js']
+    },
+
+    jasmine : {
+      src : 'app/js/**/*.js',
+      options : {
+        specs : 'spec/**/*.js'
+      }
     },
 
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      tasks: ['test']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('test', ['jshint', 'jasmine']);
+  grunt.registerTask('default', ['test', 'concat', 'uglify']);
 };

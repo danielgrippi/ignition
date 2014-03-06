@@ -23,29 +23,57 @@ module.exports = function(grunt) {
       }
     },
 
+    cssmin: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'dist/css/<%= pkg.name %>.min.css': ['dist/css/<%= pkg.name %>.css']
+        }
+      }
+    },
+
     jshint: {
       files: ['app/js/**/*.js', 'spec/**/*.js']
     },
 
-    jasmine : {
-      src : 'app/js/**/*.js',
-      options : {
-        specs : 'spec/**/*.js'
+    jasmine: {
+      src: 'app/js/**/*.js',
+      options: {
+        specs: 'spec/**/*.js'
+      }
+    },
+
+    sass: {
+      dist: {
+        files: {
+          'dist/css/<%= pkg.name %>.css': 'app/css/app.scss'
+        }
       }
     },
 
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['test']
+      js: {
+        files: ['<%= jshint.files %>'],
+        tasks: ['test']
+      },
+      css: {
+        files: ['app/css/**/*.scss', 'app/css/**/*.css'],
+        tasks: ['sass', 'cssmin']
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  grunt.loadNpmTasks('grunt-sass');
+
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('default', ['test', 'concat', 'uglify']);
+  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin']);
 };

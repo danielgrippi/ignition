@@ -6,7 +6,8 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8080,
-          base: ['dist', 'app/views']
+          base: ['dist', 'app/views'],
+          livereload: true
         }
       }
     },
@@ -63,9 +64,12 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true
+      },
       js: {
         files: ['<%= jshint.files %>'],
-        tasks: ['test', 'concat', 'uglify']
+        tasks: ['test', 'concat', 'uglify'],
       },
       css: {
         files: ['app/css/**/*.scss', 'app/css/**/*.css'],

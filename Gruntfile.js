@@ -2,6 +2,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    connect: {
+      server: {
+        options: {
+          port: 8080,
+          base: ['dist', 'app/views']
+        }
+      }
+    },
+
     concat: {
       options: {
         separator: ';'
@@ -56,7 +65,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['<%= jshint.files %>'],
-        tasks: ['test']
+        tasks: ['test', 'concat', 'uglify']
       },
       css: {
         files: ['app/css/**/*.scss', 'app/css/**/*.css'],
@@ -64,6 +73,8 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -74,6 +85,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-sass');
 
+  grunt.registerTask('server', ['connect', 'watch'])
   grunt.registerTask('test', ['jshint', 'jasmine']);
   grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin']);
 };

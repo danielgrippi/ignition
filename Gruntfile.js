@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8080,
-          base: ['dist', 'app/views'],
+          base: ['dist/views'],
           livereload: true
         }
       }
@@ -63,6 +63,15 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      views: {
+        expand: true,
+        cwd: 'app/',
+        src: 'views/**',
+        dest: 'dist'
+      }
+    },
+
     watch: {
       options: {
         livereload: true
@@ -74,6 +83,10 @@ module.exports = function(grunt) {
       css: {
         files: ['app/css/**/*.scss', 'app/css/**/*.css'],
         tasks: ['sass', 'cssmin']
+      },
+      views: {
+        files: ['app/views/**'],
+        tasks: ['copy'],
       }
     }
   });
@@ -86,10 +99,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('server', ['default', 'connect', 'watch'])
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin']);
+  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin', 'copy']);
 };

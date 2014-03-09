@@ -1,20 +1,14 @@
 /*
   app.scss
 
-  This is the main stylesheet for your application.
-  The structure of this file should look something like this:
-
-
-  // vendored
-  @import '../../bower_components/something';
-
-  // libraries
-  @import 'library1';
-
-  // components
-  @import 'component1';
-
-  // sections
-  @import 'section1';
+  This file should be used exclusively for @import delcarations.
+  NOTE: Only .scss and .css extensions are supported.
 
 */
+
+// normalize.css [http://necolas.github.io/normalize.css/]
+@import '../../bower_components/normalize.css/normalize';
+
+// bourbon sass mixins + grid system [http://bourbon.io]
+@import '../../bower_components/bourbon/app/assets/stylesheets/bourbon';
+@import '../../bower_components/neat/app/assets/stylesheets/neat';

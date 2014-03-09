@@ -1,18 +1,26 @@
 Ignition
 ========
-This is just a bunch of useful folder structure and grunt tasks.  Ignition is a convenience thing.
+Everything you need to start making a single-page web app.
 
-After downloading Ignition and running two commands, you'll have all you need to start on your next single-page app.  The only thing left is installing the dependencies you want via Bower.
-
+# What's in the box?
+- [Jasmine](http://jasmine.github.io) JS testing
+- [Sass](http://sass-lang.com) (without a Ruby dependency!)
+- Javascript / CSS / HTML uglification & minification
+- [livereload-js](https://github.com/livereload/livereload-js)
+- Static file serving via grunt (for development only, please)
+- [normalize.css](http://necolas.github.io/normalize.css/)
+- Sass mixins and a grid system via [Bourbon](http://bourbon.io)
 
 # Getting Started
-Disclaimer: Ignition depends on **node**.
 
-After cloning Ignition, run these commands in Ignition's root directory:
+## Dependencies
+- Node
+
+## One-step setup
+
 ```
 npm install
+bower install
 grunt server
 ```
-Launching `http://localhost:8080` should then launch a sample page sourcing from `app/views`, using compiled, minified sass and tested, minified javascript.
-
-Making changes to javascript and sass files (located under `app/`) will autoreload your browser.
+All included files compile to /dist on server boot.  The grunt runner serves static files on http://localhost:8080; autoreloads on changes.

@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8080,
-          base: ['dist/views'],
+          base: ['dist'],
           livereload: true
         }
       }
@@ -63,11 +63,18 @@ module.exports = function(grunt) {
       }
     },
 
-    copy: {
-      views: {
+    htmlmin: {
+      dist: {
+        options: {
+          useShortDoctype: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true
+        },
         expand: true,
-        cwd: 'app/',
-        src: 'views/**',
+        cwd: 'app/views',
+        src: '**/*.html',
         dest: 'dist'
       }
     },
@@ -86,7 +93,7 @@ module.exports = function(grunt) {
       },
       views: {
         files: ['app/views/**'],
-        tasks: ['copy'],
+        tasks: ['htmlmin'],
       }
     }
   });
@@ -99,11 +106,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('server', ['default', 'connect', 'watch'])
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin', 'copy']);
+  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin', 'htmlmin']);
 };

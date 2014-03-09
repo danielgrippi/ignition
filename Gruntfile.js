@@ -112,5 +112,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('server', ['default', 'connect', 'watch'])
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin', 'htmlmin']);
+
+  grunt.registerTask('js', ['test', 'concat:js', 'uglify:js']);
+  grunt.registerTask('css', ['sass', 'cssmin']);
+  grunt.registerTask('html', ['htmlmin']);
+
+  grunt.registerTask('default', ['js', 'css', 'html']);
 };

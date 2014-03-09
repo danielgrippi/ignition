@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('server', ['connect', 'watch'])
+  grunt.registerTask('server', ['default', 'connect', 'watch'])
   grunt.registerTask('test', ['jshint', 'jasmine']);
   grunt.registerTask('default', ['test', 'concat', 'uglify', 'sass', 'cssmin']);
 };

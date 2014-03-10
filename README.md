@@ -19,8 +19,6 @@ Everything you need to start making a single-page web app.
 ## One-step setup
 
 ```
-npm install
-bower install
-grunt server
+npm install && bower install && grunt server
 ```
 All included files compile to `/dist` on server boot.  The grunt runner serves static files on [http://localhost:8080](http://localhost:8080); autoreloads on changes.
